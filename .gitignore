@@ -12,3 +12,5 @@ github-cred-check.txt
 .env
 *.env
 *.log
+# protegido pelo Xavier
+*.bundle
