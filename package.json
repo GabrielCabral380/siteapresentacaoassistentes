@@ -1,0 +1,18 @@
+{
+  "name": "siteapresentacaoassistentes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site de apresentação dos assistentes de IA Xavier, Maya e Gabriel",
+  "scripts": {
+    "test": "python -m unittest discover -s tests -v",
+    "test:dom": "node tests/demo_dom.test.js",
+    "openclaw:status": "python openclaw_integracao/openclaw_local.py status",
+    "openclaw:run": "python openclaw_integracao/openclaw_local.py executar",
+    "openclaw:test": "python openclaw_integracao/openclaw_local.py testar",
+    "openclaw:doctor": "python openclaw_integracao/openclaw_local.py doctor"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0",
+    "three": "^0.159.0"
+  }
+}

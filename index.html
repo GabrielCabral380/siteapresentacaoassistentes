@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Xavier, Maya e Gabriel: uma equipe unificada de assistentes de IA que compartilham o mesmo conjunto de capacidades — automação, agenda, WhatsApp, casa conectada, visão computacional e criação de software.">
+  <meta name="theme-color" content="#07080f">
+  <title>Assistentes IA | Xavier, Maya e Gabriel — uma equipe, as mesmas capacidades</title>
+  <!-- Sem cache do HTML: ao recarregar, o navegador pega sempre a versão nova (e os ?v= abaixo) -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <!-- ?v= força o navegador a baixar a versão nova após cada alteração -->
+  <link rel="stylesheet" href="css/style.css?v=20261025-2">
+  <script src="js/main.js?v=20261025-2" defer></script>
+  <!-- Avatares 3D: Three.js local (funciona também abrindo o arquivo direto) + montagem dos personagens -->
+  <script src="js/vendor/three.min.js?v=0.159.0" defer></script>
+  <script src="js/avatares3d.js?v=20261025-2" defer></script>
+</head>
+<body>
+  <a href="#conteudo" class="pular">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <nav class="nav container" aria-label="Navegação principal">
+      <a href="#inicio" class="logo"><span class="logo-marca" aria-hidden="true"></span>Assist<span>IA</span></a>
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
+      <label for="menu-toggle" class="menu-icone" aria-hidden="true"><span></span></label>
+      <ul class="menu">
+        <li><a href="#capacidades">Capacidades</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+        <li><a href="#comparativo">Lado a lado</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#demo-assistentes">Voz</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <!-- ============ HERO ============ -->
+    <section id="inicio" class="hero">
+      <div class="hero-fundo" aria-hidden="true">
+        <span class="orbe orbe-1"></span><span class="orbe orbe-2"></span><span class="orbe orbe-3"></span>
+        <span class="grade-fundo"></span>
+      </div>
+      <div class="container hero-conteudo">
+        <p class="selo"><span class="pulso" aria-hidden="true"></span>Três assistentes · um só núcleo de capacidades · 24/7</p>
+        <h1>Uma equipe de IA que <span class="gradiente">age</span> — e qualquer um faz tudo.</h1>
+        <p class="hero-texto">Xavier, Maya e Gabriel compartilham exatamente o mesmo conjunto de capacidades: controlam o computador, automatizam o navegador, cuidam da agenda e do WhatsApp, comandam a casa conectada, enxergam a tela e escrevem software. Fale com qualquer um deles — todos estão prontos para qualquer tarefa, com você no controle das ações sensíveis.</p>
+        <div class="hero-acoes">
+          <a href="#capacidades" class="btn">Ver as capacidades</a>
+          <a href="#equipe" class="btn btn-contorno">Conhecer a equipe</a>
+        </div>
+
+        <figure class="hero-familia">
+          <span class="foto-halo" aria-hidden="true"></span>
+          <img src="img/FAMILIA-IA.png" data-reserva="img/FAMILIA%20IA.png" onerror="if(this.dataset.reserva){this.src=this.dataset.reserva;this.removeAttribute('data-reserva')}else{this.onerror=null;this.src='assets/img/familia.svg'}" alt="Gabriel, Xavier e Maya juntos na interface dos assistentes" width="1909" height="1071" fetchpriority="high">
+          <figcaption>Gabriel, Xavier e Maya — três personalidades, uma mesma equipe e as mesmas capacidades.</figcaption>
+        </figure>
+
+        <ul class="hero-cartoes" aria-label="Assistentes">
+          <li class="hero-cartao tema-xavier">
+            <a href="#xavier">
+              <span class="hero-avatar" data-avatar3d="xavier" data-avatar3d-modo="rosto" style="--foco: 49% 28%"><img src="img/XAVIER.png" onerror="this.onerror=null;this.src='assets/img/xavier.svg'" alt="Avatar do Xavier" width="64" height="64"></span>
+              <span><strong>Xavier</strong><small>Estilo estrategista · todas as capacidades</small></span>
+            </a>
+          </li>
+          <li class="hero-cartao tema-maya">
+            <a href="#maya">
+              <span class="hero-avatar" data-avatar3d="maya" data-avatar3d-modo="rosto" style="--foco: 48% 44%"><img src="img/MAYA.png" onerror="this.onerror=null;this.src='assets/img/maya.svg'" alt="Avatar da Maya" width="64" height="64"></span>
+              <span><strong>Maya</strong><small>Estilo organizado · todas as capacidades</small></span>
+            </a>
+          </li>
+          <li class="hero-cartao tema-gabriel">
+            <a href="#gabriel">
+              <span class="hero-avatar" data-avatar3d="gabriel" data-avatar3d-modo="rosto" style="--foco: 50% 31%"><img src="img/GABRIEL.png" onerror="this.onerror=null;this.src='assets/img/gabriel.svg'" alt="Avatar do Gabriel" width="64" height="64"></span>
+              <span><strong>Gabriel</strong><small>Estilo mão na massa · todas as capacidades</small></span>
+            </a>
+          </li>
+        </ul>
+
+        <dl class="hero-numeros">
+          <div><dt>Capacidades compartilhadas</dt><dd data-contador>60+</dd></div>
+          <div><dt>Assistentes</dt><dd>3, com o mesmo núcleo</dd></div>
+          <div><dt>Canais</dt><dd>Voz · Texto · WhatsApp</dd></div>
+          <div><dt>Ações sensíveis</dt><dd>Com sua aprovação</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ CAPACIDADES COMPARTILHADAS ============ -->
+    <section id="capacidades" class="plataforma capacidades-compartilhadas">
+      <div class="container">
+        <header class="cabecalho-secao revelar">
+          <p class="sobretitulo">Capacidades compartilhadas</p>
+          <h2 class="titulo-secao">Um só conjunto robusto de capacidades</h2>
+          <p class="subtitulo-secao">Tudo o que está listado aqui pode ser feito pelo <strong>Xavier</strong>, pela <strong>Maya</strong> ou pelo <strong>Gabriel</strong>. Não existe “assistente certo” para cada tarefa: os três usam o mesmo núcleo, a mesma memória e as mesmas ferramentas.</p>
+        </header>
+
+        <p class="nucleo-selos revelar" aria-label="Disponível para">
+          <span class="nucleo-selo tema-xavier">Xavier ✓</span>
+          <span class="nucleo-selo tema-maya">Maya ✓</span>
+          <span class="nucleo-selo tema-gabriel">Gabriel ✓</span>
+        </p>
+
+        <div class="capacidades">
+          <article class="capacidade revelar" data-capacidade="voz">
+            <h3><span aria-hidden="true">🎙️</span> Conversa e voz</h3>
+            <ul>
+              <li><strong>Palavra de despertar</strong> — fica em espera e ativa ao ouvir o nome do assistente.</li>
+              <li><strong>Reconhecimento de fala</strong> em português, com tolerância a ruído e sotaques.</li>
+              <li><strong>Voz sintetizada natural</strong> para respostas faladas, com interrupção a qualquer momento.</li>
+              <li><strong>Conversa contínua</strong> que mantém o contexto entre perguntas seguidas.</li>
+              <li><strong>Chat por texto</strong> para quando falar não é uma opção.</li>
+            </ul>
+          </article>
+          <article class="capacidade revelar" data-capacidade="arquivos">
+            <h3><span aria-hidden="true">📁</span> Controle de arquivos</h3>
+            <ul>
+              <li><strong>Criar, mover, copiar e renomear</strong> arquivos e pastas por comando de voz.</li>
+              <li><strong>Busca inteligente</strong> por nome, tipo, data ou conteúdo do arquivo.</li>
+              <li><strong>Organização automática</strong> de Downloads e Área de Trabalho por categoria.</li>
+              <li><strong>Leitura e resumo</strong> de PDFs, planilhas, documentos e textos.</li>
+              <li><strong>Compactar e extrair</strong> arquivos ZIP e limpeza de duplicados.</li>
+              <li><strong>Lixeira segura</strong> — exclusões pedem confirmação antes de executar.</li>
+            </ul>
+          </article>
+          <article class="capacidade revelar" data-capacidade="navegador">
+            <h3><span aria-hidden="true">🌐</span> Automação de navegador</h3>
+            <ul>
+              <li><strong>Abrir sites e pesquisar</strong> na web e devolver a resposta resumida.</li>
+              <li><strong>Navegação autônoma</strong> — clica, rola, preenche formulários e conclui fluxos.</li>
+              <li><strong>Extração de dados</strong> de páginas, tabelas e listas para arquivos.</li>
+              <li><strong>Monitoramento de páginas</strong> com aviso quando algo muda (preço, status, vaga).</li>
+              <li><strong>Downloads automáticos</strong> de arquivos e relatórios.</li>
+              <li><strong>YouTube e mídia</strong> — busca, reproduz e controla vídeos e músicas.</li>
+            </ul>
+          </article>
+          <article class="capacidade revelar" data-capacidade="agenda">
+            <h3><span aria-hidden="true">📅</span> Agenda e produtividade</h3>
+            <ul>
+              <li><strong>Compromissos e eventos</strong> criados, consultados e remarcados por voz.</li>
+              <li><strong>Lembretes e alarmes</strong> por horário, data ou recorrência.</li>
+              <li><strong>Lista de tarefas</strong> com prioridades e acompanhamento do que ficou pendente.</li>
+              <li><strong>Briefing diário</strong> com agenda, clima, notícias e pendências logo pela manhã.</li>
+              <li><strong>Anotações rápidas</strong> ditadas e salvas automaticamente.</li>
+            </ul>
+          </article>
+          <article class="capacidade revelar" data-capacidade="comunicacao">
+            <h3><span aria-hidden="true">💬</span> WhatsApp e comunicação</h3>
+            <ul>
+              <li><strong>Enviar mensagens</strong> no WhatsApp para contatos e grupos por voz.</li>
+              <li><strong>Ler e resumir conversas</strong> não lidas, destacando o que é urgente.</li>
+              <li><strong>Respostas sugeridas</strong> no seu estilo, enviadas só com sua aprovação.</li>
+              <li><strong>Mensagens agendadas</strong> e envio de arquivos direto do computador.</li>
+              <li><strong>Notificações push</strong> no celular para alertas e tarefas concluídas.</li>
+              <li><strong>Aprovação remota</strong> de ações sensíveis com um toque no celular.</li>
+            </ul>
+          </article>
+          <article class="capacidade revelar" data-capacidade="casa">
+            <h3><span aria-hidden="true">🏠</span> Casa inteligente com Home Assistant</h3>
+            <ul>
+              <li><strong>Luzes e tomadas</strong> — ligar, desligar, dimerizar e mudar cores por voz.</li>
+              <li><strong>Clima e ar-condicionado</strong> com temperatura e modos sob comando.</li>
+              <li><strong>Sensores</strong> de presença, portas, temperatura e consumo de energia.</li>
+              <li><strong>Cenas e automações</strong> (“modo cinema”, “sair de casa”, “boa noite”).</li>
+              <li><strong>Câmeras</strong> com alertas e análise de eventos.</li>
+              <li><strong>Estado da casa</strong> resumido em uma frase quando você pergunta.</li>
+            </ul>
+          </article>
+          <article class="capacidade revelar" data-capacidade="visao">
+            <h3><span aria-hidden="true">👁️</span> Visão e análise visual</h3>
+            <ul>
+              <li><strong>Ver a tela</strong> — descreve o que está aberto e ajuda no que você está fazendo.</li>
+              <li><strong>Leitura de prints e imagens</strong> com OCR de textos, tabelas e erros.</li>
+              <li><strong>Análise de fotos e documentos</strong> enviados por arquivo ou WhatsApp.</li>
+              <li><strong>Webcam e câmeras</strong> para identificar objetos, cenas e anomalias.</li>
+              <li><strong>Clique guiado por visão</strong> em botões e campos que não têm atalho.</li>
+              <li><strong>Comparação visual</strong> de layouts antes e depois de uma mudança.</li>
+            </ul>
+          </article>
+          <article class="capacidade revelar" data-capacidade="automacao">
+            <h3><span aria-hidden="true">⏱️</span> Rotinas e automação</h3>
+            <ul>
+              <li><strong>Rotinas agendadas</strong> por horário, dia da semana ou evento.</li>
+              <li><strong>Gatilhos inteligentes</strong> — ao chegar em casa, ao ligar o PC, ao terminar uma tarefa.</li>
+              <li><strong>Ativar e pausar rotinas</strong> a qualquer momento por voz ou painel.</li>
+              <li><strong>Integração com APIs</strong> e serviços externos sob medida.</li>
+              <li><strong>Histórico de execuções</strong> com o resultado de cada rotina.</li>
+            </ul>
+          </article>
+          <article class="capacidade revelar" data-capacidade="sistema">
+            <h3><span aria-hidden="true">🖥️</span> Sistema e saúde do PC</h3>
+            <ul>
+              <li><strong>Abrir e fechar programas</strong>, alternar e organizar janelas.</li>
+              <li><strong>Controle de teclado e mouse</strong> para automatizar qualquer aplicativo.</li>
+              <li><strong>Terminal</strong> com execução de comandos validados e explicação do resultado.</li>
+              <li><strong>Volume, brilho e energia</strong> — ajustar, bloquear, suspender ou desligar.</li>
+              <li><strong>Monitoramento contínuo</strong> de CPU, memória, disco e serviços, com alertas.</li>
+              <li><strong>Autocorreção</strong> — reinicia serviços travados e avisa você.</li>
+            </ul>
+          </article>
+          <article class="capacidade revelar" data-capacidade="software">
+            <h3><span aria-hidden="true">🏗️</span> Criação de software</h3>
+            <ul>
+              <li><strong>Projeto completo a partir de uma frase</strong> — estrutura, código, testes e README.</li>
+              <li><strong>Sites, APIs, scripts e automações</strong> em Python, JavaScript e mais.</li>
+              <li><strong>Testes automatizados</strong>: executa, lê o erro e corrige até tudo passar.</li>
+              <li><strong>Revisão de código</strong> com caça a bugs e refatorações seguras.</li>
+              <li><strong>Versionamento com Git</strong> — commits, branches e histórico.</li>
+              <li><strong>Documentação e relatórios</strong> gerados junto com a entrega.</li>
+            </ul>
+          </article>
+          <article class="capacidade revelar" data-capacidade="agentes">
+            <h3><span aria-hidden="true">🤖</span> Equipe de agentes</h3>
+            <ul>
+              <li><strong>Missões completas</strong> divididas em etapas e executadas em paralelo.</li>
+              <li><strong>Especialistas sob demanda</strong> — design, segurança, dados, produto.</li>
+              <li><strong>Fila de tarefas</strong> com status, cancelamento e reexecução.</li>
+              <li><strong>Passagem de bastão</strong> — qualquer assistente continua a tarefa de onde outro parou.</li>
+              <li><strong>Segunda opinião</strong> de outro modelo de IA em decisões críticas.</li>
+            </ul>
+          </article>
+          <article class="capacidade revelar" data-capacidade="memoria">
+            <h3><span aria-hidden="true">🧠</span> Memória, pesquisa e segurança</h3>
+            <ul>
+              <li><strong>Memória de longo prazo compartilhada</strong> — o que um aprende, os três sabem.</li>
+              <li><strong>Lembrar sob comando</strong> — “guarda isso” e fica guardado.</li>
+              <li><strong>Pesquisa aprofundada</strong> com várias fontes e resumo final.</li>
+              <li><strong>Clima, notícias, cotações, tradução e redação</strong> na hora.</li>
+              <li><strong>Aprovações pendentes</strong> centralizadas num painel único.</li>
+              <li><strong>Registro auditável</strong> de tudo o que foi executado.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EQUIPE ============ -->
+    <section id="equipe" class="plataforma equipe">
+      <div class="container">
+        <header class="cabecalho-secao revelar">
+          <p class="sobretitulo">A equipe</p>
+          <h2 class="titulo-secao">Três assistentes, uma equipe unificada</h2>
+          <p class="subtitulo-secao">Xavier, Maya e Gabriel não dividem o trabalho em especialidades: cada um está pronto para executar <a href="#capacidades">qualquer uma das capacidades</a>. O que muda é só a personalidade — escolha o estilo que combina com você.</p>
+        </header>
+        <ul class="pilares">
+          <li class="pilar revelar"><span class="pilar-icone" aria-hidden="true">🧩</span><h3>Mesmo núcleo</h3><p>As mesmas ferramentas, integrações e permissões nos três assistentes.</p></li>
+          <li class="pilar revelar"><span class="pilar-icone" aria-hidden="true">🔗</span><h3>Memória compartilhada</h3><p>Preferências, projetos e decisões ficam disponíveis para toda a equipe.</p></li>
+          <li class="pilar revelar"><span class="pilar-icone" aria-hidden="true">🔄</span><h3>Sem fila de espera</h3><p>Se um está ocupado, outro assume na hora e continua de onde parou.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ XAVIER ============ -->
+    <section id="xavier" class="assistente tema-xavier">
+      <div class="container">
+        <div class="assistente-grade revelar">
+          <figure class="assistente-foto">
+            <span class="foto-halo" aria-hidden="true"></span>
+            <div class="avatar3d-busto" data-avatar3d="xavier" data-avatar3d-modo="busto">
+              <img src="img/XAVIER.png" onerror="this.onerror=null;this.src='assets/img/xavier.svg'" alt="Xavier, assistente de inteligência artificial" width="420" height="525" loading="lazy">
+              <span class="avatar3d-dica" aria-hidden="true">👋 Passe o mouse ou toque para ele acenar</span>
+            </div>
+            <figcaption class="status"><span class="pulso" aria-hidden="true"></span>Online · pronto para qualquer tarefa</figcaption>
+          </figure>
+          <div class="assistente-info">
+            <p class="selo">Membro da equipe · acesso a todas as capacidades</p>
+            <h2>Xavier</h2>
+            <p class="lead">O estrategista. Xavier pensa antes de agir, explica o plano em poucas palavras e vai direto ao resultado. Ele executa <strong>qualquer uma das capacidades da equipe</strong> — organizar arquivos, pilotar o navegador, cuidar da agenda, responder no WhatsApp, acender as luzes de casa, ler a tela ou criar um projeto de software.</p>
+            <h3 class="pronto-titulo">Pronto para executar</h3>
+            <ul class="pronto" aria-label="Capacidades que o Xavier executa">
+              <li data-capacidade="voz">Voz</li><li data-capacidade="arquivos">Arquivos</li><li data-capacidade="navegador">Navegador</li><li data-capacidade="agenda">Agenda</li><li data-capacidade="comunicacao">WhatsApp</li><li data-capacidade="casa">Casa</li><li data-capacidade="visao">Visão</li><li data-capacidade="automacao">Automação</li><li data-capacidade="sistema">Sistema</li><li data-capacidade="software">Software</li><li data-capacidade="agentes">Agentes</li><li data-capacidade="memoria">Memória</li>
+            </ul>
+            <dl class="metricas">
+              <div><dt>Capacidades</dt><dd>Todas (12 de 12)</dd></div>
+              <div><dt>Núcleo</dt><dd>Compartilhado</dd></div>
+              <div><dt>Estilo</dt><dd>Estrategista</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MAYA ============ -->
+    <section id="maya" class="assistente tema-maya invertido">
+      <div class="container">
+        <div class="assistente-grade revelar">
+          <figure class="assistente-foto">
+            <span class="foto-halo" aria-hidden="true"></span>
+            <div class="avatar3d-busto" data-avatar3d="maya" data-avatar3d-modo="busto">
+              <img src="img/MAYA.png" onerror="this.onerror=null;this.src='assets/img/maya.svg'" alt="Maya, assistente de inteligência artificial" width="420" height="525" loading="lazy">
+              <span class="avatar3d-dica" aria-hidden="true">👋 Passe o mouse ou toque para ela acenar</span>
+            </div>
+            <figcaption class="status"><span class="pulso" aria-hidden="true"></span>Online · pronta para qualquer tarefa</figcaption>
+          </figure>
+          <div class="assistente-info">
+            <p class="selo">Membro da equipe · acesso a todas as capacidades</p>
+            <h2>Maya</h2>
+            <p class="lead">A organizada. Maya é atenta aos detalhes, antecipa o que você vai precisar e avisa antes que algo vire problema. Ela executa <strong>qualquer uma das capacidades da equipe</strong> — de rotinas e casa conectada a WhatsApp, agenda, automação de navegador, análise visual e código.</p>
+            <h3 class="pronto-titulo">Pronta para executar</h3>
+            <ul class="pronto" aria-label="Capacidades que a Maya executa">
+              <li data-capacidade="voz">Voz</li><li data-capacidade="arquivos">Arquivos</li><li data-capacidade="navegador">Navegador</li><li data-capacidade="agenda">Agenda</li><li data-capacidade="comunicacao">WhatsApp</li><li data-capacidade="casa">Casa</li><li data-capacidade="visao">Visão</li><li data-capacidade="automacao">Automação</li><li data-capacidade="sistema">Sistema</li><li data-capacidade="software">Software</li><li data-capacidade="agentes">Agentes</li><li data-capacidade="memoria">Memória</li>
+            </ul>
+            <dl class="metricas">
+              <div><dt>Capacidades</dt><dd>Todas (12 de 12)</dd></div>
+              <div><dt>Núcleo</dt><dd>Compartilhado</dd></div>
+              <div><dt>Estilo</dt><dd>Organizada</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GABRIEL ============ -->
+    <section id="gabriel" class="assistente tema-gabriel">
+      <div class="container">
+        <div class="assistente-grade revelar">
+          <figure class="assistente-foto">
+            <span class="foto-halo" aria-hidden="true"></span>
+            <div class="avatar3d-busto" data-avatar3d="gabriel" data-avatar3d-modo="busto">
+              <img src="img/GABRIEL.png" onerror="this.onerror=null;this.src='assets/img/gabriel.svg'" alt="Gabriel, assistente de inteligência artificial" width="420" height="525" loading="lazy">
+              <span class="avatar3d-dica" aria-hidden="true">👋 Passe o mouse ou toque para ele acenar</span>
+            </div>
+            <figcaption class="status"><span class="pulso" aria-hidden="true"></span>Online · pronto para qualquer tarefa</figcaption>
+          </figure>
+          <div class="assistente-info">
+            <p class="selo">Membro da equipe · acesso a todas as capacidades</p>
+            <h2>Gabriel</h2>
+            <p class="lead">O mão na massa. Gabriel é direto, prático e gosta de mostrar o resultado funcionando. Ele executa <strong>qualquer uma das capacidades da equipe</strong> — cria software, mas também cuida da agenda, manda mensagens, controla a casa, organiza arquivos e enxerga a tela.</p>
+            <h3 class="pronto-titulo">Pronto para executar</h3>
+            <ul class="pronto" aria-label="Capacidades que o Gabriel executa">
+              <li data-capacidade="voz">Voz</li><li data-capacidade="arquivos">Arquivos</li><li data-capacidade="navegador">Navegador</li><li data-capacidade="agenda">Agenda</li><li data-capacidade="comunicacao">WhatsApp</li><li data-capacidade="casa">Casa</li><li data-capacidade="visao">Visão</li><li data-capacidade="automacao">Automação</li><li data-capacidade="sistema">Sistema</li><li data-capacidade="software">Software</li><li data-capacidade="agentes">Agentes</li><li data-capacidade="memoria">Memória</li>
+            </ul>
+            <dl class="metricas">
+              <div><dt>Capacidades</dt><dd>Todas (12 de 12)</dd></div>
+              <div><dt>Núcleo</dt><dd>Compartilhado</dd></div>
+              <div><dt>Estilo</dt><dd>Mão na massa</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LADO A LADO ============ -->
+    <section id="comparativo" class="comparativo">
+      <div class="container">
+        <header class="cabecalho-secao revelar">
+          <p class="sobretitulo">Lado a lado</p>
+          <h2 class="titulo-secao">Qual assistente escolher? Qualquer um.</h2>
+          <p class="subtitulo-secao">Os três executam todas as capacidades. ✓ indica que o assistente realiza a tarefa por completo.</p>
+        </header>
+        <div class="tabela-wrap revelar">
+          <table>
+            <caption>Capacidades compartilhadas por Xavier, Maya e Gabriel</caption>
+            <thead>
+              <tr><th scope="col">Capacidade</th><th scope="col">Xavier</th><th scope="col">Maya</th><th scope="col">Gabriel</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Conversa por voz</th><td class="sim">✓</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+              <tr><th scope="row">Controle de arquivos</th><td class="sim">✓</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+              <tr><th scope="row">Automação de navegador</th><td class="sim">✓</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+              <tr><th scope="row">Agenda e lembretes</th><td class="sim">✓</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+              <tr><th scope="row">WhatsApp e notificações</th><td class="sim">✓</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+              <tr><th scope="row">Home Assistant</th><td class="sim">✓</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+              <tr><th scope="row">Análise visual</th><td class="sim">✓</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+              <tr><th scope="row">Rotinas e automação</th><td class="sim">✓</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+              <tr><th scope="row">Sistema e saúde do PC</th><td class="sim">✓</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+              <tr><th scope="row">Criação de software</th><td class="sim">✓</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+              <tr><th scope="row">Equipe de agentes</th><td class="sim">✓</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+              <tr><th scope="row">Memória de longo prazo</th><td class="sim">✓</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+              <tr class="linha-estilo"><th scope="row">Personalidade</th><td>Estrategista</td><td>Organizada</td><td>Mão na massa</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DEMO INTERATIVO ============ -->
+    <section id="demo" class="demo">
+      <div class="container">
+        <header class="cabecalho-secao revelar">
+          <p class="sobretitulo">Demo Interativo</p>
+          <h2 class="titulo-secao">Escolha um assistente e converse</h2>
+          <p class="subtitulo-secao">Escolha o Xavier, a Maya ou o Gabriel e converse por texto ou pela voz: o avatar olha para você, ouve, pensa e responde falando, com a boca acompanhando cada palavra. Diga seu nome e os três passam a lembrar dele. As respostas são simuladas — os três executam as mesmas tarefas; o que muda é a personalidade.</p>
+        </header>
+
+        <div class="demo-caixa tema-xavier revelar" data-demo>
+          <div class="demo-escolhas" role="group" aria-label="Escolher assistente">
+            <button type="button" class="demo-escolha tema-xavier ativo" data-assistente="xavier" aria-pressed="true">
+              <span class="demo-avatar">
+                <svg class="avatar-svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+                  <circle class="av-fundo" cx="60" cy="60" r="58"/>
+                  <rect class="av-corpo" x="53" y="86" width="14" height="10" rx="3"/>
+                  <path class="av-corpo" d="M38 114c2-11 11-18 22-18s20 7 22 18z"/>
+                  <line class="av-traco" x1="60" y1="14" x2="60" y2="27"/>
+                  <circle class="av-brilho" cx="60" cy="12" r="5"/>
+                  <rect class="av-cabeca" x="24" y="27" width="72" height="62" rx="22"/>
+                  <rect class="av-tela" x="32" y="37" width="56" height="40" rx="14"/>
+                  <g class="av-olhos"><rect class="av-olho" x="39" y="48" width="15" height="7" rx="3.5"/><rect class="av-olho" x="66" y="48" width="15" height="7" rx="3.5"/></g>
+                  <rect class="av-boca" x="52" y="64" width="16" height="4" rx="2"/>
+                  <g class="av-pensando"><circle cx="94" cy="20" r="3.5"/><circle cx="104" cy="13" r="3.5"/><circle cx="114" cy="6" r="3.5"/></g>
+                </svg>
+              </span>
+              <span class="demo-escolha-texto"><strong>Xavier</strong><small>Estrategista</small></span>
+            </button>
+            <button type="button" class="demo-escolha tema-maya" data-assistente="maya" aria-pressed="false">
+              <span class="demo-avatar">
+                <svg class="avatar-svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+                  <circle class="av-fundo" cx="60" cy="60" r="58"/>
+                  <rect class="av-corpo" x="53" y="86" width="14" height="10" rx="3"/>
+                  <path class="av-corpo" d="M38 114c2-11 11-18 22-18s20 7 22 18z"/>
+                  <circle class="av-peca" cx="23" cy="60" r="7"/>
+                  <circle class="av-peca" cx="97" cy="60" r="7"/>
+                  <rect class="av-cabeca" x="26" y="26" width="68" height="64" rx="32"/>
+                  <path class="av-traco" d="M27 52a33 33 0 0 1 66 0"/>
+                  <circle class="av-brilho" cx="60" cy="19" r="4.5"/>
+                  <rect class="av-tela" x="34" y="40" width="52" height="38" rx="19"/>
+                  <g class="av-olhos"><circle class="av-olho" cx="48" cy="54" r="5"/><circle class="av-olho" cx="72" cy="54" r="5"/></g>
+                  <rect class="av-boca" x="53" y="66" width="14" height="4" rx="2"/>
+                  <g class="av-pensando"><circle cx="94" cy="20" r="3.5"/><circle cx="104" cy="13" r="3.5"/><circle cx="114" cy="6" r="3.5"/></g>
+                </svg>
+              </span>
+              <span class="demo-escolha-texto"><strong>Maya</strong><small>Organizada</small></span>
+            </button>
+            <button type="button" class="demo-escolha tema-gabriel" data-assistente="gabriel" aria-pressed="false">
+              <span class="demo-avatar">
+                <svg class="avatar-svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+                  <circle class="av-fundo" cx="60" cy="60" r="58"/>
+                  <rect class="av-corpo" x="53" y="86" width="14" height="10" rx="3"/>
+                  <path class="av-corpo" d="M38 114c2-11 11-18 22-18s20 7 22 18z"/>
+                  <rect class="av-cabeca" x="25" y="27" width="70" height="62" rx="18"/>
+                  <path class="av-traco" d="M22 58a38 38 0 0 1 76 0"/>
+                  <rect class="av-peca" x="15" y="48" width="11" height="22" rx="5"/>
+                  <rect class="av-peca" x="94" y="48" width="11" height="22" rx="5"/>
+                  <path class="av-traco av-fino" d="M20 70q0 16 22 16"/>
+                  <circle class="av-brilho" cx="44" cy="86" r="3.5"/>
+                  <rect class="av-tela" x="33" y="37" width="54" height="40" rx="10"/>
+                  <g class="av-olhos"><rect class="av-olho" x="39" y="47" width="13" height="10" rx="3"/><rect class="av-olho" x="68" y="47" width="13" height="10" rx="3"/></g>
+                  <line class="av-traco av-fino" x1="52" y1="52" x2="68" y2="52"/>
+                  <rect class="av-boca" x="51" y="65" width="18" height="4" rx="2"/>
+                  <g class="av-pensando"><circle cx="94" cy="20" r="3.5"/><circle cx="104" cy="13" r="3.5"/><circle cx="114" cy="6" r="3.5"/></g>
+                </svg>
+              </span>
+              <span class="demo-escolha-texto"><strong>Gabriel</strong><small>Mão na massa</small></span>
+            </button>
+          </div>
+
+          <div class="demo-grade">
+            <div class="demo-palco" data-palco data-estado="ocioso">
+              <span class="demo-palco-halo" aria-hidden="true"></span>
+              <div class="demo-palco-avatar">
+                <span class="demo-palco-ondas" aria-hidden="true"><span></span><span></span><span></span></span>
+                <svg class="avatar-svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+                  <circle class="av-fundo" cx="60" cy="60" r="58"/>
+                  <rect class="av-corpo" x="53" y="86" width="14" height="10" rx="3"/>
+                  <path class="av-corpo" d="M38 114c2-11 11-18 22-18s20 7 22 18z"/>
+                  <line class="av-traco" x1="60" y1="14" x2="60" y2="27"/>
+                  <circle class="av-brilho" cx="60" cy="12" r="5"/>
+                  <rect class="av-cabeca" x="24" y="27" width="72" height="62" rx="22"/>
+                  <rect class="av-tela" x="32" y="37" width="56" height="40" rx="14"/>
+                  <g class="av-olhos"><rect class="av-olho" x="39" y="48" width="15" height="7" rx="3.5"/><rect class="av-olho" x="66" y="48" width="15" height="7" rx="3.5"/></g>
+                  <rect class="av-boca" x="52" y="64" width="16" height="4" rx="2"/>
+                  <g class="av-pensando"><circle cx="94" cy="20" r="3.5"/><circle cx="104" cy="13" r="3.5"/><circle cx="114" cy="6" r="3.5"/></g>
+                </svg>
+              </div>
+              <p class="demo-palco-nome" data-palco-nome>Xavier</p>
+              <p class="demo-palco-papel" data-palco-papel>Estrategista · todas as capacidades</p>
+              <p class="demo-palco-status"><span class="pulso" aria-hidden="true"></span><span data-palco-status>Online · pronto para ajudar</span></p>
+              <p class="demo-palco-acao" data-palco-acao>💡 Escolha um atalho, digite ou fale</p>
+              <button type="button" class="demo-voz-toggle" data-voz-toggle aria-pressed="false" hidden><span class="demo-voz-icone" aria-hidden="true"></span><span data-voz-rotulo>Voz desligada</span></button>
+            </div>
+
+            <div class="demo-chat">
+              <div class="demo-log" role="log" aria-live="polite" aria-label="Conversa de demonstração">
+                <div class="demo-msg demo-assistente tema-xavier"><p class="demo-msg-balao"><strong>Xavier</strong><span class="demo-msg-texto">Olá! Escolha um de nós acima e peça qualquer coisa: arquivos, agenda, WhatsApp, a casa ou um projeto de código.</span></p></div>
+              </div>
+
+              <div class="demo-sugestoes" role="group" aria-label="Sugestões de mensagem">
+                <button type="button" class="demo-sugestao">Organize meus arquivos</button>
+                <button type="button" class="demo-sugestao">O que tenho na agenda amanhã?</button>
+                <button type="button" class="demo-sugestao">Leia meu WhatsApp</button>
+              </div>
+
+              <form class="demo-form" action="#demo" autocomplete="off">
+                <button type="button" class="demo-mic" aria-label="Falar por voz" aria-pressed="false" aria-describedby="demo-dica" title="Falar por voz (toque de novo para enviar)">
+                  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+                    <rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                  </svg>
+                </button>
+                <label for="demo-pergunta" class="sr-only">Sua mensagem</label>
+                <input type="text" id="demo-pergunta" class="demo-campo" name="pergunta" maxlength="200" placeholder="Pergunte algo para o Xavier…">
+                <button type="submit" class="btn btn-pequeno demo-enviar">Enviar</button>
+              </form>
+              <p class="demo-dica" id="demo-dica" role="status" hidden></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DEMO DOS ASSISTENTES ============ -->
+    <section id="demo-assistentes" class="demo demo-voz">
+      <div class="container">
+        <header class="cabecalho-secao revelar">
+          <p class="sobretitulo">Demo de voz</p>
+          <h2 class="titulo-secao">Conheça os assistentes <span class="gradiente">em ação</span></h2>
+          <p class="subtitulo-secao">Fale com o Xavier, a Maya ou o Gabriel e veja a voz transformar seu fluxo de trabalho. Os três ouvem, entendem e executam as mesmas tarefas — cada um com o seu estilo.</p>
+        </header>
+
+        <ul class="voz-grade">
+          <li class="voz-cartao tema-xavier revelar">
+            <span class="voz-brilho" aria-hidden="true"></span>
+            <div class="voz-avatar">
+              <span class="voz-foto" data-avatar3d="xavier" data-avatar3d-modo="rosto" data-avatar3d-fala style="--foco: 49% 28%"><img src="img/XAVIER.png" onerror="this.onerror=null;this.src='assets/img/xavier.svg'" alt="Avatar do Xavier" width="112" height="112" loading="lazy"></span>
+              <span class="voz-online" title="Online"></span>
+            </div>
+            <h3 class="voz-nome">Xavier</h3>
+            <p class="voz-papel">Estrategista · todas as capacidades</p>
+            <div class="voz-painel" role="img" aria-label="Simulação da interface de voz: Xavier está falando">
+              <span class="voz-mic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" focusable="false">
+                  <rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="voz-onda" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+            </div>
+            <p class="voz-fala">“Analisando a arquitetura do projeto…”</p>
+          </li>
+
+          <li class="voz-cartao tema-maya revelar">
+            <span class="voz-brilho" aria-hidden="true"></span>
+            <div class="voz-avatar">
+              <span class="voz-foto" data-avatar3d="maya" data-avatar3d-modo="rosto" data-avatar3d-fala style="--foco: 48% 44%"><img src="img/MAYA.png" onerror="this.onerror=null;this.src='assets/img/maya.svg'" alt="Avatar da Maya" width="112" height="112" loading="lazy"></span>
+              <span class="voz-online" title="Online"></span>
+            </div>
+            <h3 class="voz-nome">Maya</h3>
+            <p class="voz-papel">Organizada · todas as capacidades</p>
+            <div class="voz-painel" role="img" aria-label="Simulação da interface de voz: Maya está falando">
+              <span class="voz-mic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" focusable="false">
+                  <rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="voz-onda" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+            </div>
+            <p class="voz-fala">“Organizando sua agenda de amanhã…”</p>
+          </li>
+
+          <li class="voz-cartao tema-gabriel revelar">
+            <span class="voz-brilho" aria-hidden="true"></span>
+            <div class="voz-avatar">
+              <span class="voz-foto" data-avatar3d="gabriel" data-avatar3d-modo="rosto" data-avatar3d-fala style="--foco: 50% 31%"><img src="img/GABRIEL.png" onerror="this.onerror=null;this.src='assets/img/gabriel.svg'" alt="Avatar do Gabriel" width="112" height="112" loading="lazy"></span>
+              <span class="voz-online" title="Online"></span>
+            </div>
+            <h3 class="voz-nome">Gabriel</h3>
+            <p class="voz-papel">Mão na massa · todas as capacidades</p>
+            <div class="voz-painel" role="img" aria-label="Simulação da interface de voz: Gabriel está falando">
+              <span class="voz-mic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" focusable="false">
+                  <rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="voz-onda" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+            </div>
+            <p class="voz-fala">“Executando o pipeline de testes…”</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

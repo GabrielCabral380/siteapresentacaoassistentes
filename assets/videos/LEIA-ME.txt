@@ -1,0 +1,12 @@
+Coloque aqui os vídeos gravados com os assistentes (.mp4, .webm, .ogg ou .mov).
+
+Para publicar um vídeo na Galeria de Conteúdo do index.html, preencha o
+atributo data-video do card desejado, por exemplo:
+
+  <div class="video-slot" data-video="assets/videos/xavier-dia.mp4" data-poster="assets/videos/xavier-dia.jpg">
+
+Também funcionam links do YouTube ou Vimeo:
+
+  <div class="video-slot" data-video="https://youtu.be/XXXXXXXXXXX">
+
+data-poster é opcional (imagem de capa, só para arquivos locais).
