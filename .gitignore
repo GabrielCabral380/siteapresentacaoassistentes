@@ -14,3 +14,5 @@ github-cred-check.txt
 *.log
 # protegido pelo Xavier
 *.bundle
+# protegido pelo Xavier
+.gitignore.antes-*
