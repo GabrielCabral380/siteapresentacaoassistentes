@@ -21,3 +21,12 @@
 - Testes: `verificar_avatares3d.py` TUDO OK (4 checagens novas: marca "ativo", aviso sem WebGL, fechar aviso, aviso sem three.min.js); `verificar_navegador.py` TUDO OK; unittest 81 OK.
 
 - Limite da verificação: não houve escuta humana do áudio nem entrada de voz por microfone físico; esses fluxos foram cobertos com APIs simuladas nos testes de DOM.
+
+## Avatares 3D: qualidade e desempenho (25/10/2026)
+
+- Fotos: `tools/otimizar_imagens.py` gera AVIF e WebP em 240/480/960/1440 px (`img/otimizadas/`). As 10 fotos estão em `<picture>` com `srcset`/`sizes`; o PNG original continua como reserva no `src` (cadeia: AVIF/WebP → PNG → SVG, via `soltarFontes` no `<head>`). A foto principal tem `preload` no tamanho certo. Na primeira tela as fotos baixadas somam 38 KB (desktop) e 55 KB (celular), contra cerca de 8 MB de PNG antes.
+- Three.js sob demanda: saiu do `<head>`. `js/avatares3d.js` testa WebGL antes e injeta `js/vendor/three.min.js` quando um avatar chega a 600 px da tela, ou no tempo ocioso depois do `load` em conexão 4G. Com Save-Data ou `prefers-reduced-data`, ficam só as fotos leves. `?avatares3d=1` força o 3D; `?avatares3d=0` desliga.
+- Visual: estúdio virtual por assistente (PMREM gerado na hora, sem arquivo HDR), materiais físicos (pele/cabelo/tecido com sheen, olhos com verniz), tone mapping ACES, shaders compilados antes da troca (`compileAsync`) e fade-in da foto para o 3D.
+- Desempenho: a resolução se adapta entre 50% e 100% da densidade de pixels conforme o custo do quadro. Medido: 1,00 com CPU normal (8 ms/quadro) e 0,50 com CPU 6× mais lenta.
+- Backup: `backup/*.antes-otimizacao-20261025`.
+- Testes: unittest 84 OK (novos: picture/AVIF, tamanhos, preload, Three.js sob demanda); `node tests/demo_dom.test.js` 20/20; `verificar_navegador.py` TUDO OK; `verificar_avatares3d.py` TUDO OK, com 10 checagens novas de desempenho (Three.js fora do caminho crítico, só AVIF, bytes, Save-Data, `?avatares3d=1`).

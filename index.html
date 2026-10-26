@@ -11,11 +11,53 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <!-- ?v= força o navegador a baixar a versão nova após cada alteração -->
-  <link rel="stylesheet" href="css/style.css?v=20261025-2">
-  <script src="js/main.js?v=20261025-2" defer></script>
-  <!-- Avatares 3D: Three.js local (funciona também abrindo o arquivo direto) + montagem dos personagens -->
-  <script src="js/vendor/three.min.js?v=0.159.0" defer></script>
-  <script src="js/avatares3d.js?v=20261025-2" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=20261025-3">
+  <style id="avatar-upgrade">
+    /* Retratos SVG: mais humanos, legíveis e leves que os antigos robôs geométricos. */
+    .avatar-svg .av-fundo { fill: url(#av-bg-xavier); stroke-width: 1.5; }
+    .avatar-svg .av-cabeca { fill: var(--av-pele, #d79b7b); stroke: none; }
+    .avatar-svg .av-tela { fill: none; stroke: rgba(255,255,255,.12); stroke-width: 1; }
+    .avatar-svg .av-corpo { fill: var(--av-roupa, #17243c); stroke: rgba(255,255,255,.12); stroke-width: 1; }
+    .avatar-svg .av-cabelo { fill: var(--av-cabelo, #2b1b18); }
+    .avatar-svg .av-orelha { fill: var(--av-pele, #d79b7b); stroke: rgba(255,255,255,.18); stroke-width: 1; }
+    .avatar-svg .av-olho { fill: #f7fbff; stroke: rgba(255,255,255,.35); stroke-width: 1; }
+    .avatar-svg .av-pupila { fill: var(--cor-tema-2); filter: drop-shadow(0 0 3px var(--cor-tema-2)); }
+    .avatar-svg .av-sobrancelha { fill: none; stroke: var(--av-cabelo, #2b1b18); stroke-width: 2.2; stroke-linecap: round; }
+    .avatar-svg .av-nariz { fill: none; stroke: color-mix(in srgb, var(--av-pele, #d79b7b) 55%, #43251f); stroke-width: 1.4; stroke-linecap: round; }
+    .avatar-svg .av-boca { fill: none; stroke: #ffb6bd; stroke-width: 2.2; stroke-linecap: round; transform: scaleX(calc(.72 + var(--boca, 0) * .5)); }
+    .avatar-svg .av-brilho { fill: var(--cor-tema-2); filter: drop-shadow(0 0 5px var(--cor-tema-2)); }
+    .avatar-svg .av-traco { stroke: var(--cor-tema); }
+    .avatar-svg .av-peca { fill: var(--cor-tema); opacity: .8; }
+    .avatar-svg .av-pensando { fill: var(--cor-tema-2); }
+    .avatar-svg .av-marca { fill: none; stroke: rgba(255,255,255,.32); stroke-width: 1; }
+    .avatar-svg .av-olhos { transform-box: fill-box; transform-origin: center; }
+    .demo-palco[data-estado="falando"] .avatar-svg .av-boca { stroke-width: 3; }
+    .demo-palco[data-estado="ouvindo"] .avatar-svg .av-brilho { animation: avatarListen 1s ease-in-out infinite; }
+    @keyframes avatarListen { 50% { opacity: .35; transform: scale(1.5); } }
+    .demo-escolha[data-assistente="xavier"] .avatar-svg { --av-pele:#d69b7e; --av-cabelo:#4b2d27; --av-roupa:#17243c; }
+    .demo-escolha[data-assistente="maya"] .avatar-svg { --av-pele:#dba483; --av-cabelo:#201a27; --av-roupa:#241b3f; }
+    .demo-escolha[data-assistente="gabriel"] .avatar-svg { --av-pele:#a96f50; --av-cabelo:#17131a; --av-roupa:#193b46; }
+    .demo-escolha[data-assistente="xavier"] .av-fundo, .demo-palco .avatar-svg .av-fundo { fill: url(#av-bg-xavier); }
+    .demo-escolha[data-assistente="maya"] .av-fundo { fill: url(#av-bg-maya); }
+    .demo-escolha[data-assistente="gabriel"] .av-fundo { fill: url(#av-bg-gabriel); }
+  </style>
+  <!-- Foto principal (maior elemento da primeira tela): baixa cedo, já no tamanho certo -->
+  <link rel="preload" as="image" type="image/avif" fetchpriority="high"
+        imagesrcset="img/otimizadas/familia-240.avif 240w, img/otimizadas/familia-480.avif 480w, img/otimizadas/familia-960.avif 960w, img/otimizadas/familia-1440.avif 1440w"
+        imagesizes="(max-width: 1000px) 100vw, 960px">
+  <script>
+    /* <picture> com AVIF/WebP (img/otimizadas, gerado por tools/otimizar_imagens.py): se a versão leve falhar,
+       remove os <source> e o navegador volta ao PNG do src; só depois cai no SVG. */
+    function soltarFontes(img) {
+      var fontes = img.parentNode && img.parentNode.tagName === "PICTURE" ? img.parentNode.querySelectorAll("source") : [];
+      for (var i = 0; i < fontes.length; i++) fontes[i].remove();
+      return fontes.length > 0;
+    }
+  </script>
+  <script src="js/main.js?v=20261025-3" defer></script>
+  <!-- Avatares 3D: avatares3d.js é pequeno; o Three.js (js/vendor/three.min.js, ~170 KB comprimido)
+       só é baixado sob demanda, quando um avatar se aproxima da tela ou o navegador fica ocioso. -->
+  <script src="js/avatares3d.js?v=20261025-3" defer></script>
 </head>
 <body>
   <a href="#conteudo" class="pular">Pular para o conteúdo</a>
@@ -53,26 +95,26 @@
 
         <figure class="hero-familia">
           <span class="foto-halo" aria-hidden="true"></span>
-          <img src="img/FAMILIA-IA.png" data-reserva="img/FAMILIA%20IA.png" onerror="if(this.dataset.reserva){this.src=this.dataset.reserva;this.removeAttribute('data-reserva')}else{this.onerror=null;this.src='assets/img/familia.svg'}" alt="Gabriel, Xavier e Maya juntos na interface dos assistentes" width="1909" height="1071" fetchpriority="high">
+          <picture><source type="image/avif" srcset="img/otimizadas/familia-240.avif 240w, img/otimizadas/familia-480.avif 480w, img/otimizadas/familia-960.avif 960w, img/otimizadas/familia-1440.avif 1440w" sizes="(max-width: 1000px) 100vw, 960px"><source type="image/webp" srcset="img/otimizadas/familia-240.webp 240w, img/otimizadas/familia-480.webp 480w, img/otimizadas/familia-960.webp 960w, img/otimizadas/familia-1440.webp 1440w" sizes="(max-width: 1000px) 100vw, 960px"><img decoding="async" src="img/FAMILIA-IA.png" data-reserva="img/FAMILIA%20IA.png" onerror="if(soltarFontes(this))return;if(this.dataset.reserva){this.src=this.dataset.reserva;this.removeAttribute('data-reserva')}else{this.onerror=null;this.src='assets/img/familia.svg'}" alt="Gabriel, Xavier e Maya juntos na interface dos assistentes" width="1909" height="1071" fetchpriority="high"></picture>
           <figcaption>Gabriel, Xavier e Maya — três personalidades, uma mesma equipe e as mesmas capacidades.</figcaption>
         </figure>
 
         <ul class="hero-cartoes" aria-label="Assistentes">
           <li class="hero-cartao tema-xavier">
             <a href="#xavier">
-              <span class="hero-avatar" data-avatar3d="xavier" data-avatar3d-modo="rosto" style="--foco: 49% 28%"><img src="img/XAVIER.png" onerror="this.onerror=null;this.src='assets/img/xavier.svg'" alt="Avatar do Xavier" width="64" height="64"></span>
+              <span class="hero-avatar" data-avatar3d="xavier" data-avatar3d-modo="rosto" style="--foco: 49% 28%"><picture><source type="image/avif" srcset="img/otimizadas/xavier-240.avif 240w, img/otimizadas/xavier-480.avif 480w, img/otimizadas/xavier-960.avif 960w, img/otimizadas/xavier-1440.avif 1440w" sizes="240px"><source type="image/webp" srcset="img/otimizadas/xavier-240.webp 240w, img/otimizadas/xavier-480.webp 480w, img/otimizadas/xavier-960.webp 960w, img/otimizadas/xavier-1440.webp 1440w" sizes="240px"><img decoding="async" src="img/XAVIER.png" onerror="if(soltarFontes(this))return;this.onerror=null;this.src='assets/img/xavier.svg'" alt="Avatar do Xavier" width="64" height="64"></picture></span>
               <span><strong>Xavier</strong><small>Estilo estrategista · todas as capacidades</small></span>
             </a>
           </li>
           <li class="hero-cartao tema-maya">
             <a href="#maya">
-              <span class="hero-avatar" data-avatar3d="maya" data-avatar3d-modo="rosto" style="--foco: 48% 44%"><img src="img/MAYA.png" onerror="this.onerror=null;this.src='assets/img/maya.svg'" alt="Avatar da Maya" width="64" height="64"></span>
+              <span class="hero-avatar" data-avatar3d="maya" data-avatar3d-modo="rosto" style="--foco: 48% 44%"><picture><source type="image/avif" srcset="img/otimizadas/maya-240.avif 240w, img/otimizadas/maya-480.avif 480w, img/otimizadas/maya-960.avif 960w, img/otimizadas/maya-1440.avif 1440w" sizes="240px"><source type="image/webp" srcset="img/otimizadas/maya-240.webp 240w, img/otimizadas/maya-480.webp 480w, img/otimizadas/maya-960.webp 960w, img/otimizadas/maya-1440.webp 1440w" sizes="240px"><img decoding="async" src="img/MAYA.png" onerror="if(soltarFontes(this))return;this.onerror=null;this.src='assets/img/maya.svg'" alt="Avatar da Maya" width="64" height="64"></picture></span>
               <span><strong>Maya</strong><small>Estilo organizado · todas as capacidades</small></span>
             </a>
           </li>
           <li class="hero-cartao tema-gabriel">
             <a href="#gabriel">
-              <span class="hero-avatar" data-avatar3d="gabriel" data-avatar3d-modo="rosto" style="--foco: 50% 31%"><img src="img/GABRIEL.png" onerror="this.onerror=null;this.src='assets/img/gabriel.svg'" alt="Avatar do Gabriel" width="64" height="64"></span>
+              <span class="hero-avatar" data-avatar3d="gabriel" data-avatar3d-modo="rosto" style="--foco: 50% 31%"><picture><source type="image/avif" srcset="img/otimizadas/gabriel-240.avif 240w, img/otimizadas/gabriel-480.avif 480w, img/otimizadas/gabriel-960.avif 960w, img/otimizadas/gabriel-1440.avif 1440w" sizes="240px"><source type="image/webp" srcset="img/otimizadas/gabriel-240.webp 240w, img/otimizadas/gabriel-480.webp 480w, img/otimizadas/gabriel-960.webp 960w, img/otimizadas/gabriel-1440.webp 1440w" sizes="240px"><img decoding="async" src="img/GABRIEL.png" onerror="if(soltarFontes(this))return;this.onerror=null;this.src='assets/img/gabriel.svg'" alt="Avatar do Gabriel" width="64" height="64"></picture></span>
               <span><strong>Gabriel</strong><small>Estilo mão na massa · todas as capacidades</small></span>
             </a>
           </li>
@@ -258,7 +300,7 @@
           <figure class="assistente-foto">
             <span class="foto-halo" aria-hidden="true"></span>
             <div class="avatar3d-busto" data-avatar3d="xavier" data-avatar3d-modo="busto">
-              <img src="img/XAVIER.png" onerror="this.onerror=null;this.src='assets/img/xavier.svg'" alt="Xavier, assistente de inteligência artificial" width="420" height="525" loading="lazy">
+              <picture><source type="image/avif" srcset="img/otimizadas/xavier-240.avif 240w, img/otimizadas/xavier-480.avif 480w, img/otimizadas/xavier-960.avif 960w, img/otimizadas/xavier-1440.avif 1440w" sizes="(max-width: 460px) 200vw, 940px"><source type="image/webp" srcset="img/otimizadas/xavier-240.webp 240w, img/otimizadas/xavier-480.webp 480w, img/otimizadas/xavier-960.webp 960w, img/otimizadas/xavier-1440.webp 1440w" sizes="(max-width: 460px) 200vw, 940px"><img decoding="async" src="img/XAVIER.png" onerror="if(soltarFontes(this))return;this.onerror=null;this.src='assets/img/xavier.svg'" alt="Xavier, assistente de inteligência artificial" width="420" height="525" loading="lazy"></picture>
               <span class="avatar3d-dica" aria-hidden="true">👋 Passe o mouse ou toque para ele acenar</span>
             </div>
             <figcaption class="status"><span class="pulso" aria-hidden="true"></span>Online · pronto para qualquer tarefa</figcaption>
@@ -288,7 +330,7 @@
           <figure class="assistente-foto">
             <span class="foto-halo" aria-hidden="true"></span>
             <div class="avatar3d-busto" data-avatar3d="maya" data-avatar3d-modo="busto">
-              <img src="img/MAYA.png" onerror="this.onerror=null;this.src='assets/img/maya.svg'" alt="Maya, assistente de inteligência artificial" width="420" height="525" loading="lazy">
+              <picture><source type="image/avif" srcset="img/otimizadas/maya-240.avif 240w, img/otimizadas/maya-480.avif 480w, img/otimizadas/maya-960.avif 960w, img/otimizadas/maya-1440.avif 1440w" sizes="(max-width: 460px) 200vw, 940px"><source type="image/webp" srcset="img/otimizadas/maya-240.webp 240w, img/otimizadas/maya-480.webp 480w, img/otimizadas/maya-960.webp 960w, img/otimizadas/maya-1440.webp 1440w" sizes="(max-width: 460px) 200vw, 940px"><img decoding="async" src="img/MAYA.png" onerror="if(soltarFontes(this))return;this.onerror=null;this.src='assets/img/maya.svg'" alt="Maya, assistente de inteligência artificial" width="420" height="525" loading="lazy"></picture>
               <span class="avatar3d-dica" aria-hidden="true">👋 Passe o mouse ou toque para ela acenar</span>
             </div>
             <figcaption class="status"><span class="pulso" aria-hidden="true"></span>Online · pronta para qualquer tarefa</figcaption>
@@ -318,7 +360,7 @@
           <figure class="assistente-foto">
             <span class="foto-halo" aria-hidden="true"></span>
             <div class="avatar3d-busto" data-avatar3d="gabriel" data-avatar3d-modo="busto">
-              <img src="img/GABRIEL.png" onerror="this.onerror=null;this.src='assets/img/gabriel.svg'" alt="Gabriel, assistente de inteligência artificial" width="420" height="525" loading="lazy">
+              <picture><source type="image/avif" srcset="img/otimizadas/gabriel-240.avif 240w, img/otimizadas/gabriel-480.avif 480w, img/otimizadas/gabriel-960.avif 960w, img/otimizadas/gabriel-1440.avif 1440w" sizes="(max-width: 460px) 200vw, 940px"><source type="image/webp" srcset="img/otimizadas/gabriel-240.webp 240w, img/otimizadas/gabriel-480.webp 480w, img/otimizadas/gabriel-960.webp 960w, img/otimizadas/gabriel-1440.webp 1440w" sizes="(max-width: 460px) 200vw, 940px"><img decoding="async" src="img/GABRIEL.png" onerror="if(soltarFontes(this))return;this.onerror=null;this.src='assets/img/gabriel.svg'" alt="Gabriel, assistente de inteligência artificial" width="420" height="525" loading="lazy"></picture>
               <span class="avatar3d-dica" aria-hidden="true">👋 Passe o mouse ou toque para ele acenar</span>
             </div>
             <figcaption class="status"><span class="pulso" aria-hidden="true"></span>Online · pronto para qualquer tarefa</figcaption>
@@ -386,60 +428,54 @@
 
         <div class="demo-caixa tema-xavier revelar" data-demo>
           <div class="demo-escolhas" role="group" aria-label="Escolher assistente">
-            <button type="button" class="demo-escolha tema-xavier ativo" data-assistente="xavier" aria-pressed="true">
+            <button type="button" class="demo-escolha agent-card tema-xavier ativo" data-assistente="xavier" data-agent="xavier" onclick="ativarAgente('xavier')" aria-pressed="true">
               <span class="demo-avatar">
                 <svg class="avatar-svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-                  <circle class="av-fundo" cx="60" cy="60" r="58"/>
-                  <rect class="av-corpo" x="53" y="86" width="14" height="10" rx="3"/>
-                  <path class="av-corpo" d="M38 114c2-11 11-18 22-18s20 7 22 18z"/>
-                  <line class="av-traco" x1="60" y1="14" x2="60" y2="27"/>
-                  <circle class="av-brilho" cx="60" cy="12" r="5"/>
-                  <rect class="av-cabeca" x="24" y="27" width="72" height="62" rx="22"/>
-                  <rect class="av-tela" x="32" y="37" width="56" height="40" rx="14"/>
-                  <g class="av-olhos"><rect class="av-olho" x="39" y="48" width="15" height="7" rx="3.5"/><rect class="av-olho" x="66" y="48" width="15" height="7" rx="3.5"/></g>
-                  <rect class="av-boca" x="52" y="64" width="16" height="4" rx="2"/>
-                  <g class="av-pensando"><circle cx="94" cy="20" r="3.5"/><circle cx="104" cy="13" r="3.5"/><circle cx="114" cy="6" r="3.5"/></g>
-                </svg>
+                                  <defs><radialGradient id="av-bg-xavier"><stop stop-color="#24436b"/><stop offset="1" stop-color="#101827"/></radialGradient></defs>
+                                  <circle class="av-fundo" cx="60" cy="60" r="58"/><path class="av-corpo" d="M25 120c3-22 17-34 35-34s32 12 35 34z"/>
+                                  <path class="av-traco" d="M60 8v9"/><circle class="av-brilho" cx="60" cy="7" r="4"/>
+                                  <ellipse class="av-orelha" cx="29" cy="59" rx="7" ry="11"/><ellipse class="av-orelha" cx="91" cy="59" rx="7" ry="11"/>
+                                  <path class="av-cabeca" d="M34 55c0-25 10-36 26-36s26 11 26 36v13c0 18-11 29-26 29S34 86 34 68z"/>
+                                  <path class="av-cabelo" d="M34 55c0-25 10-39 27-39 15 0 24 10 25 28-8-8-18-11-29-9-8 2-15 8-23 20z"/>
+                                  <path class="av-sobrancelha" d="M42 55q7-5 14 0M65 55q7-5 14 0"/>
+                                  <g class="av-olhos"><ellipse class="av-olho" cx="49" cy="62" rx="7" ry="4"/><ellipse class="av-olho" cx="71" cy="62" rx="7" ry="4"/><circle class="av-pupila" cx="50" cy="62" r="2.4"/><circle class="av-pupila" cx="72" cy="62" r="2.4"/></g>
+                                  <path class="av-nariz" d="M60 62v11q-3 3-6 1"/><path class="av-boca" d="M52 82q8 5 16 0"/>
+                                  <g class="av-pensando"><circle cx="96" cy="20" r="3"/><circle cx="105" cy="13" r="3"/><circle cx="114" cy="7" r="3"/></g>
+                                </svg>
               </span>
               <span class="demo-escolha-texto"><strong>Xavier</strong><small>Estrategista</small></span>
             </button>
-            <button type="button" class="demo-escolha tema-maya" data-assistente="maya" aria-pressed="false">
+            <button type="button" class="demo-escolha agent-card tema-maya" data-assistente="maya" data-agent="maya" onclick="ativarAgente('maya')" aria-pressed="false">
               <span class="demo-avatar">
                 <svg class="avatar-svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-                  <circle class="av-fundo" cx="60" cy="60" r="58"/>
-                  <rect class="av-corpo" x="53" y="86" width="14" height="10" rx="3"/>
-                  <path class="av-corpo" d="M38 114c2-11 11-18 22-18s20 7 22 18z"/>
-                  <circle class="av-peca" cx="23" cy="60" r="7"/>
-                  <circle class="av-peca" cx="97" cy="60" r="7"/>
-                  <rect class="av-cabeca" x="26" y="26" width="68" height="64" rx="32"/>
-                  <path class="av-traco" d="M27 52a33 33 0 0 1 66 0"/>
-                  <circle class="av-brilho" cx="60" cy="19" r="4.5"/>
-                  <rect class="av-tela" x="34" y="40" width="52" height="38" rx="19"/>
-                  <g class="av-olhos"><circle class="av-olho" cx="48" cy="54" r="5"/><circle class="av-olho" cx="72" cy="54" r="5"/></g>
-                  <rect class="av-boca" x="53" y="66" width="14" height="4" rx="2"/>
-                  <g class="av-pensando"><circle cx="94" cy="20" r="3.5"/><circle cx="104" cy="13" r="3.5"/><circle cx="114" cy="6" r="3.5"/></g>
-                </svg>
+                                                  <defs><radialGradient id="av-bg-maya"><stop stop-color="#563d73"/><stop offset="1" stop-color="#171426"/></radialGradient></defs>
+                                                  <circle class="av-fundo" cx="60" cy="60" r="58"/><path class="av-corpo" d="M22 120c4-23 18-35 38-35s34 12 38 35z"/>
+                                                  <circle class="av-peca" cx="24" cy="58" r="6"/><circle class="av-peca" cx="96" cy="58" r="6"/><circle class="av-brilho" cx="60" cy="11" r="4"/>
+                                                  <ellipse class="av-orelha" cx="29" cy="61" rx="6" ry="10"/><ellipse class="av-orelha" cx="91" cy="61" rx="6" ry="10"/>
+                                                  <path class="av-cabeca" d="M34 54c0-25 10-35 26-35s26 10 26 35v14c0 18-11 29-26 29S34 86 34 68z"/>
+                                                  <path class="av-cabelo" d="M33 59c-5-24 4-44 27-44 19 0 29 14 27 38l-8-15c-7 7-19 11-38 8z"/>
+                                                  <path class="av-sobrancelha" d="M42 55q7-4 14 0M65 55q7-4 14 0"/>
+                                                  <g class="av-olhos"><ellipse class="av-olho" cx="49" cy="62" rx="7" ry="4"/><ellipse class="av-olho" cx="71" cy="62" rx="7" ry="4"/><circle class="av-pupila" cx="50" cy="62" r="2.4"/><circle class="av-pupila" cx="72" cy="62" r="2.4"/></g>
+                                                  <path class="av-nariz" d="M60 62v11q3 3 6 1"/><path class="av-boca" d="M52 82q8 5 16 0"/>
+                                                  <g class="av-pensando"><circle cx="96" cy="20" r="3"/><circle cx="105" cy="13" r="3"/><circle cx="114" cy="7" r="3"/></g>
+                                                </svg>
               </span>
               <span class="demo-escolha-texto"><strong>Maya</strong><small>Organizada</small></span>
             </button>
-            <button type="button" class="demo-escolha tema-gabriel" data-assistente="gabriel" aria-pressed="false">
+            <button type="button" class="demo-escolha agent-card tema-gabriel" data-assistente="gabriel" data-agent="gabriel" onclick="ativarAgente('gabriel')" aria-pressed="false">
               <span class="demo-avatar">
                 <svg class="avatar-svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-                  <circle class="av-fundo" cx="60" cy="60" r="58"/>
-                  <rect class="av-corpo" x="53" y="86" width="14" height="10" rx="3"/>
-                  <path class="av-corpo" d="M38 114c2-11 11-18 22-18s20 7 22 18z"/>
-                  <rect class="av-cabeca" x="25" y="27" width="70" height="62" rx="18"/>
-                  <path class="av-traco" d="M22 58a38 38 0 0 1 76 0"/>
-                  <rect class="av-peca" x="15" y="48" width="11" height="22" rx="5"/>
-                  <rect class="av-peca" x="94" y="48" width="11" height="22" rx="5"/>
-                  <path class="av-traco av-fino" d="M20 70q0 16 22 16"/>
-                  <circle class="av-brilho" cx="44" cy="86" r="3.5"/>
-                  <rect class="av-tela" x="33" y="37" width="54" height="40" rx="10"/>
-                  <g class="av-olhos"><rect class="av-olho" x="39" y="47" width="13" height="10" rx="3"/><rect class="av-olho" x="68" y="47" width="13" height="10" rx="3"/></g>
-                  <line class="av-traco av-fino" x1="52" y1="52" x2="68" y2="52"/>
-                  <rect class="av-boca" x="51" y="65" width="18" height="4" rx="2"/>
-                  <g class="av-pensando"><circle cx="94" cy="20" r="3.5"/><circle cx="104" cy="13" r="3.5"/><circle cx="114" cy="6" r="3.5"/></g>
-                </svg>
+                                                  <defs><radialGradient id="av-bg-gabriel"><stop stop-color="#2b6570"/><stop offset="1" stop-color="#101c25"/></radialGradient></defs>
+                                                  <circle class="av-fundo" cx="60" cy="60" r="58"/><path class="av-corpo" d="M20 120c5-23 19-35 40-35s35 12 40 35z"/>
+                                                  <rect class="av-peca" x="14" y="50" width="10" height="20" rx="5"/><rect class="av-peca" x="96" y="50" width="10" height="20" rx="5"/><circle class="av-brilho" cx="43" cy="87" r="3.5"/>
+                                                  <ellipse class="av-orelha" cx="29" cy="61" rx="7" ry="11"/><ellipse class="av-orelha" cx="91" cy="61" rx="7" ry="11"/>
+                                                  <path class="av-cabeca" d="M34 55c0-25 10-35 26-35s26 10 26 35v13c0 18-11 29-26 29S34 86 34 68z"/>
+                                                  <path class="av-cabelo" d="M33 55c0-24 11-39 28-39 17 0 26 13 26 34l-9-10c-13 8-28 10-45 15z"/>
+                                                  <path class="av-sobrancelha" d="M42 55q7-4 14 0M65 55q7-4 14 0"/>
+                                                  <g class="av-olhos"><ellipse class="av-olho" cx="49" cy="62" rx="7" ry="4"/><ellipse class="av-olho" cx="71" cy="62" rx="7" ry="4"/><circle class="av-pupila" cx="50" cy="62" r="2.4"/><circle class="av-pupila" cx="72" cy="62" r="2.4"/></g>
+                                                  <path class="av-nariz" d="M60 62v11q-3 3-6 1"/><path class="av-boca" d="M51 82q9 5 18 0"/>
+                                                  <g class="av-pensando"><circle cx="96" cy="20" r="3"/><circle cx="105" cy="13" r="3"/><circle cx="114" cy="7" r="3"/></g>
+                                                </svg>
               </span>
               <span class="demo-escolha-texto"><strong>Gabriel</strong><small>Mão na massa</small></span>
             </button>
@@ -451,17 +487,17 @@
               <div class="demo-palco-avatar">
                 <span class="demo-palco-ondas" aria-hidden="true"><span></span><span></span><span></span></span>
                 <svg class="avatar-svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-                  <circle class="av-fundo" cx="60" cy="60" r="58"/>
-                  <rect class="av-corpo" x="53" y="86" width="14" height="10" rx="3"/>
-                  <path class="av-corpo" d="M38 114c2-11 11-18 22-18s20 7 22 18z"/>
-                  <line class="av-traco" x1="60" y1="14" x2="60" y2="27"/>
-                  <circle class="av-brilho" cx="60" cy="12" r="5"/>
-                  <rect class="av-cabeca" x="24" y="27" width="72" height="62" rx="22"/>
-                  <rect class="av-tela" x="32" y="37" width="56" height="40" rx="14"/>
-                  <g class="av-olhos"><rect class="av-olho" x="39" y="48" width="15" height="7" rx="3.5"/><rect class="av-olho" x="66" y="48" width="15" height="7" rx="3.5"/></g>
-                  <rect class="av-boca" x="52" y="64" width="16" height="4" rx="2"/>
-                  <g class="av-pensando"><circle cx="94" cy="20" r="3.5"/><circle cx="104" cy="13" r="3.5"/><circle cx="114" cy="6" r="3.5"/></g>
-                </svg>
+                                  <defs><radialGradient id="av-bg-xavier"><stop stop-color="#24436b"/><stop offset="1" stop-color="#101827"/></radialGradient></defs>
+                                  <circle class="av-fundo" cx="60" cy="60" r="58"/><path class="av-corpo" d="M25 120c3-22 17-34 35-34s32 12 35 34z"/>
+                                  <path class="av-traco" d="M60 8v9"/><circle class="av-brilho" cx="60" cy="7" r="4"/>
+                                  <ellipse class="av-orelha" cx="29" cy="59" rx="7" ry="11"/><ellipse class="av-orelha" cx="91" cy="59" rx="7" ry="11"/>
+                                  <path class="av-cabeca" d="M34 55c0-25 10-36 26-36s26 11 26 36v13c0 18-11 29-26 29S34 86 34 68z"/>
+                                  <path class="av-cabelo" d="M34 55c0-25 10-39 27-39 15 0 24 10 25 28-8-8-18-11-29-9-8 2-15 8-23 20z"/>
+                                  <path class="av-sobrancelha" d="M42 55q7-5 14 0M65 55q7-5 14 0"/>
+                                  <g class="av-olhos"><ellipse class="av-olho" cx="49" cy="62" rx="7" ry="4"/><ellipse class="av-olho" cx="71" cy="62" rx="7" ry="4"/><circle class="av-pupila" cx="50" cy="62" r="2.4"/><circle class="av-pupila" cx="72" cy="62" r="2.4"/></g>
+                                  <path class="av-nariz" d="M60 62v11q-3 3-6 1"/><path class="av-boca" d="M52 82q8 5 16 0"/>
+                                  <g class="av-pensando"><circle cx="96" cy="20" r="3"/><circle cx="105" cy="13" r="3"/><circle cx="114" cy="7" r="3"/></g>
+                                </svg>
               </div>
               <p class="demo-palco-nome" data-palco-nome>Xavier</p>
               <p class="demo-palco-papel" data-palco-papel>Estrategista · todas as capacidades</p>
@@ -512,7 +548,7 @@
           <li class="voz-cartao tema-xavier revelar">
             <span class="voz-brilho" aria-hidden="true"></span>
             <div class="voz-avatar">
-              <span class="voz-foto" data-avatar3d="xavier" data-avatar3d-modo="rosto" data-avatar3d-fala style="--foco: 49% 28%"><img src="img/XAVIER.png" onerror="this.onerror=null;this.src='assets/img/xavier.svg'" alt="Avatar do Xavier" width="112" height="112" loading="lazy"></span>
+              <span class="voz-foto" data-avatar3d="xavier" data-avatar3d-modo="rosto" data-avatar3d-fala style="--foco: 49% 28%"><picture><source type="image/avif" srcset="img/otimizadas/xavier-240.avif 240w, img/otimizadas/xavier-480.avif 480w, img/otimizadas/xavier-960.avif 960w, img/otimizadas/xavier-1440.avif 1440w" sizes="480px"><source type="image/webp" srcset="img/otimizadas/xavier-240.webp 240w, img/otimizadas/xavier-480.webp 480w, img/otimizadas/xavier-960.webp 960w, img/otimizadas/xavier-1440.webp 1440w" sizes="480px"><img decoding="async" src="img/XAVIER.png" onerror="if(soltarFontes(this))return;this.onerror=null;this.src='assets/img/xavier.svg'" alt="Avatar do Xavier" width="112" height="112" loading="lazy"></picture></span>
               <span class="voz-online" title="Online"></span>
             </div>
             <h3 class="voz-nome">Xavier</h3>
@@ -532,7 +568,7 @@
           <li class="voz-cartao tema-maya revelar">
             <span class="voz-brilho" aria-hidden="true"></span>
             <div class="voz-avatar">
-              <span class="voz-foto" data-avatar3d="maya" data-avatar3d-modo="rosto" data-avatar3d-fala style="--foco: 48% 44%"><img src="img/MAYA.png" onerror="this.onerror=null;this.src='assets/img/maya.svg'" alt="Avatar da Maya" width="112" height="112" loading="lazy"></span>
+              <span class="voz-foto" data-avatar3d="maya" data-avatar3d-modo="rosto" data-avatar3d-fala style="--foco: 48% 44%"><picture><source type="image/avif" srcset="img/otimizadas/maya-240.avif 240w, img/otimizadas/maya-480.avif 480w, img/otimizadas/maya-960.avif 960w, img/otimizadas/maya-1440.avif 1440w" sizes="480px"><source type="image/webp" srcset="img/otimizadas/maya-240.webp 240w, img/otimizadas/maya-480.webp 480w, img/otimizadas/maya-960.webp 960w, img/otimizadas/maya-1440.webp 1440w" sizes="480px"><img decoding="async" src="img/MAYA.png" onerror="if(soltarFontes(this))return;this.onerror=null;this.src='assets/img/maya.svg'" alt="Avatar da Maya" width="112" height="112" loading="lazy"></picture></span>
               <span class="voz-online" title="Online"></span>
             </div>
             <h3 class="voz-nome">Maya</h3>
@@ -552,7 +588,7 @@
           <li class="voz-cartao tema-gabriel revelar">
             <span class="voz-brilho" aria-hidden="true"></span>
             <div class="voz-avatar">
-              <span class="voz-foto" data-avatar3d="gabriel" data-avatar3d-modo="rosto" data-avatar3d-fala style="--foco: 50% 31%"><img src="img/GABRIEL.png" onerror="this.onerror=null;this.src='assets/img/gabriel.svg'" alt="Avatar do Gabriel" width="112" height="112" loading="lazy"></span>
+              <span class="voz-foto" data-avatar3d="gabriel" data-avatar3d-modo="rosto" data-avatar3d-fala style="--foco: 50% 31%"><picture><source type="image/avif" srcset="img/otimizadas/gabriel-240.avif 240w, img/otimizadas/gabriel-480.avif 480w, img/otimizadas/gabriel-960.avif 960w, img/otimizadas/gabriel-1440.avif 1440w" sizes="480px"><source type="image/webp" srcset="img/otimizadas/gabriel-240.webp 240w, img/otimizadas/gabriel-480.webp 480w, img/otimizadas/gabriel-960.webp 960w, img/otimizadas/gabriel-1440.webp 1440w" sizes="480px"><img decoding="async" src="img/GABRIEL.png" onerror="if(soltarFontes(this))return;this.onerror=null;this.src='assets/img/gabriel.svg'" alt="Avatar do Gabriel" width="112" height="112" loading="lazy"></picture></span>
               <span class="voz-online" title="Online"></span>
             </div>
             <h3 class="voz-nome">Gabriel</h3>

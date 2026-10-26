@@ -595,11 +595,49 @@ class TestAvatares3D(unittest.TestCase):
         cls.html = carregar_html()
         cls.css = (RAIZ / "css" / "style.css").read_text(encoding="utf-8")
 
-    def test_three_local_carrega_antes_dos_avatares(self):
+    def test_three_local_carregado_sob_demanda(self):
         scripts = [a["src"].split("?")[0] for t, a in self.html.tags if t == "script" and a.get("src")]
-        self.assertIn("js/vendor/three.min.js", scripts)
-        self.assertLess(scripts.index("js/vendor/three.min.js"), scripts.index("js/avatares3d.js"))
+        self.assertIn("js/avatares3d.js", scripts)
+        # O Three.js (~670 KB) não bloqueia a página: avatares3d.js o injeta quando precisa.
+        self.assertNotIn("js/vendor/three.min.js", scripts)
         self.assertNotIn("http", " ".join(scripts))
+        js = (RAIZ / "js" / "avatares3d.js").read_text(encoding="utf-8")
+        self.assertIn('"vendor/three.min.js?v="', js)
+        self.assertIn("IntersectionObserver", js)
+        self.assertIn("requestIdleCallback", js)
+        self.assertIn("saveData", js)
+        self.assertTrue((RAIZ / "js" / "vendor" / "three.min.js").is_file())
+
+    def test_fotos_em_picture_com_avif_webp_responsivos(self):
+        picture = re.findall(r"<picture>(.*?)</picture>", self.conteudo, re.S)
+        self.assertEqual(len(picture), 10)
+        for bloco in picture:
+            tipos = re.findall(r'<source type="image/(\w+)" srcset="([^"]+)" sizes="[^"]+">', bloco)
+            self.assertEqual([t for t, _ in tipos], ["avif", "webp"], bloco[:120])
+            for _, srcset in tipos:
+                for item in srcset.split(", "):
+                    arquivo, largura = item.split(" ")
+                    self.assertTrue((RAIZ / arquivo).is_file(), arquivo)
+                    self.assertRegex(largura, r"^\d+w$")
+            self.assertIn("if(soltarFontes(this))return;", bloco)
+            self.assertIn('src="img/', bloco)  # PNG original continua como reserva
+        self.assertIn("function soltarFontes(img)", self.conteudo)
+
+    def test_versoes_otimizadas_sao_bem_menores(self):
+        for png, nome in (("FAMILIA-IA.png", "familia"), ("XAVIER.png", "xavier"),
+                          ("MAYA.png", "maya"), ("GABRIEL.png", "gabriel")):
+            original = (RAIZ / "img" / png).stat().st_size
+            for formato in ("avif", "webp"):
+                maior = (RAIZ / "img" / "otimizadas" / f"{nome}-1440.{formato}").stat().st_size
+                self.assertLess(maior * 10, original, f"{nome}-1440.{formato}")
+
+    def test_foto_principal_pre_carregada_no_tamanho_certo(self):
+        preload = next(a for t, a in self.html.tags if t == "link" and a.get("rel") == "preload")
+        self.assertEqual(preload["as"], "image")
+        familia = re.search(r'<source type="image/avif" srcset="([^"]+)" sizes="([^"]+)">\s*<source[^>]*>\s*<img[^>]*FAMILIA',
+                            self.conteudo)
+        self.assertEqual(preload["imagesrcset"], familia.group(1))
+        self.assertEqual(preload["imagesizes"], familia.group(2))
 
     def test_cada_secao_tem_busto_3d_com_foto_de_reserva(self):
         for nome in ASSISTENTES:
@@ -650,7 +688,8 @@ console.log(JSON.stringify(resultado));
             capture_output=True, text=True, encoding="utf-8", cwd=RAIZ, check=True,
         ).stdout
         resultado = json.loads(saida.strip().splitlines()[-1])
-        self.assertEqual(resultado["semThree"], {"ativo": False, "motivo": "sem-three", "ativos": 0, "erros": []})
+        # Sem Three.js na página: o jsdom não tem WebGL, então nem chega a baixar o three.min.js.
+        self.assertEqual(resultado["semThree"], {"ativo": False, "motivo": "sem-webgl", "ativos": 0, "erros": []})
         self.assertEqual(resultado["comThree"], {"ativo": False, "motivo": "sem-webgl", "ativos": 0, "erros": []})
 
 

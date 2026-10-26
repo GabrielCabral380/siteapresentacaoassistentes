@@ -381,6 +381,14 @@
     return quadros;
   }
 
+  // API mínima dos cards: o HTML pode ativar qualquer agente sem conhecer a lógica do chat.
+  // O evento mantém a seleção testável e evita duplicar a implementação no atributo onclick.
+  if (typeof window !== "undefined") {
+    window.ativarAgente = function (nome) {
+      window.dispatchEvent(new CustomEvent("ativar-agente", { detail: String(nome || "") }));
+    };
+  }
+
   if (typeof module !== "undefined" && module.exports) {
     module.exports = {
       normalizarTexto: normalizarTexto,
@@ -865,8 +873,9 @@
       }, 3200);
     }
 
-    escolhas.forEach(function (botao) {
-      botao.addEventListener("click", function () { selecionar(botao.dataset.assistente); });
+    window.addEventListener("ativar-agente", function (e) {
+      var nome = e.detail;
+      if (demo.querySelector('.demo-escolha[data-agent="' + nome + '"]')) selecionar(nome);
     });
 
     form.addEventListener("submit", function (e) {

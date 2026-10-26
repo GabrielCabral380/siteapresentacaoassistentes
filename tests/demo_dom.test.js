@@ -349,9 +349,14 @@ teste("Esc interrompe a fala", async () => {
   assert.equal(p.palco.dataset.estado, "ocioso");
 });
 
-teste("foto do grupo cai para FAMILIA IA.png e depois para o SVG", () => {
+teste("foto do grupo: AVIF/WebP -> PNG -> FAMILIA IA.png -> SVG", () => {
   const dom = montar();
   const img = dom.window.document.querySelector(".hero-familia img");
+  assert.equal(img.getAttribute("src"), "img/FAMILIA-IA.png");
+  assert.equal(img.parentNode.querySelectorAll("source").length, 2);
+  img.dispatchEvent(new dom.window.Event("error"));
+  // 1ª falha: tira as versões leves e o navegador volta ao PNG do src
+  assert.equal(img.parentNode.querySelectorAll("source").length, 0);
   assert.equal(img.getAttribute("src"), "img/FAMILIA-IA.png");
   img.dispatchEvent(new dom.window.Event("error"));
   assert.equal(img.getAttribute("src"), "img/FAMILIA%20IA.png");

@@ -592,7 +592,34 @@ code {
   display: block;
 }
 
-.avatar3d-ativo > img {
+/* Troca suave da foto para o 3D quando o Three.js termina de carregar (sob demanda) */
+.avatar3d-ativo > .avatar3d-canvas {
+  animation: avatar3d-surgir 0.6s ease-out both;
+}
+
+.avatar3d-ativo > img,
+.avatar3d-ativo > picture > img {
+  transition: opacity 0.6s ease-out;
+}
+
+@keyframes avatar3d-surgir {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-card.ativo .demo-avatar { animation: none; }
+  .avatar3d-ativo > .avatar3d-canvas { animation: none; }
+}
+
+/* As fotos ficam dentro de <picture> (AVIF/WebP); display: contents faz o <img> se comportar como filho direto. */
+[data-avatar3d] > picture,
+.hero-familia > picture {
+  display: contents;
+}
+
+.avatar3d-ativo > img,
+.avatar3d-ativo > picture > img {
   position: absolute;
   inset: 0;
   opacity: 0;
@@ -1027,6 +1054,29 @@ tbody tr:hover {
   transition: transform var(--transicao), border-color var(--transicao), background var(--transicao);
 }
 
+/* Cards de agentes: cada avatar é um ponto de entrada para a conversa simulada. */
+.agent-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.agent-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at 18% 50%, color-mix(in srgb, var(--cor-tema) 20%, transparent), transparent 58%);
+  transition: opacity var(--transicao);
+}
+
+.agent-card:hover::after,
+.agent-card.ativo::after {
+  opacity: 1;
+}
+
 .demo-escolha:hover {
   color: var(--texto);
   border-color: var(--borda-forte);
@@ -1043,6 +1093,21 @@ tbody tr:hover {
   border-color: var(--cor-tema);
   background: color-mix(in srgb, var(--cor-tema) 14%, transparent);
   box-shadow: 0 10px 30px color-mix(in srgb, var(--cor-tema) 22%, transparent);
+}
+
+.agent-card.ativo .demo-avatar {
+  animation: pulseGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 0 color-mix(in srgb, var(--cor-tema) 0%, transparent));
+    transform: scale(1.08);
+  }
+  50% {
+    filter: drop-shadow(0 0 13px color-mix(in srgb, var(--cor-tema) 78%, transparent));
+    transform: scale(1.14);
+  }
 }
 
 .demo-avatar {
