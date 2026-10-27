@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Gabriel, Xavier & Maya</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navegação / Cabeçalho -->
+    <header class="site-header">
+        <div class="container">
+            <a href="#" class="logo">Nosso Projeto</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#hero">Início</a></li>
+                    <li><a href="#equipe">Equipe</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Seção Principal / Hero -->
+    <section id="hero" class="hero-section">
+        <div class="container hero-content">
+            <h1>Bem-vindo ao Novo Projeto</h1>
+            <p>Construindo soluções inteligentes e experiências interativas do zero.</p>
+            <a href="#equipe" class="btn-primary">Conheça a Equipe</a>
+        </div>
+    </section>
+
+    <!-- Seção da Equipe com Espaço para Avatares Animados e Interativos -->
+    <section id="equipe" class="team-section">
+        <div class="container">
+            <h2>Nossa Equipe</h2>
+            <p class="section-subtitle">Avatares interativos desenvolvidos sob medida</p>
+
+            <div class="team-grid">
+                <!-- Card Xavier -->
+                <div class="team-card" id="card-xavier">
+                    <div class="avatar-stage" data-avatar-id="xavier">
+                        <div class="avatar-canvas-wrapper" id="avatar-container-xavier">
+                            <!-- Slot para o Canvas/Renderizador 3D ou Fallback 2D Animado -->
+                            <img src="img/XAVIER.png" alt="Xavier" class="avatar-fallback" onerror="this.style.display='none'">
+                        </div>
+                        <div class="avatar-status-badge">Pronto</div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Xavier</h3>
+                        <span class="role">Especialista / Arquiteto</span>
+                        <p>Análise técnica, lógica avançada e execução estruturada.</p>
+                    </div>
+                </div>
+
+                <!-- Card Maya -->
+                <div class="team-card" id="card-maya">
+                    <div class="avatar-stage" data-avatar-id="maya">
+                        <div class="avatar-canvas-wrapper" id="avatar-container-maya">
+                            <!-- Slot para o Canvas/Renderizador 3D ou Fallback 2D Animado -->
+                            <img src="img/MAYA.png" alt="Maya" class="avatar-fallback" onerror="this.style.display='none'">
+                        </div>
+                        <div class="avatar-status-badge">Pronto</div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Maya</h3>
+                        <span class="role">Designer & UI/UX</span>
+                        <p>Criação visual, estético e experiência de usuário imersiva.</p>
+                    </div>
+                </div>
+
+                <!-- Card Gabriel -->
+                <div class="team-card" id="card-gabriel">
+                    <div class="avatar-stage" data-avatar-id="gabriel">
+                        <div class="avatar-canvas-wrapper" id="avatar-container-gabriel">
+                            <!-- Slot para o Canvas/Renderizador 3D ou Fallback 2D Animado -->
+                            <img src="img/GABRIEL.png" alt="Gabriel" class="avatar-fallback" onerror="this.style.display='none'">
+                        </div>
+                        <div class="status-badge">Pronto</div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Gabriel</h3>
+                        <span class="role">Líder do Projeto</span>
+                        <p>Visão estratégica, direcionamento e concepção da plataforma.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre / Conteúdo -->
+    <section id="sobre" class="about-section">
+        <div class="container">
+            <h2>Sobre o Projeto</h2>
+            <p>Este site foi reconstruído do zero com arquitetura limpa, alta performance e componentes modulares pré-preparados para integração de tecnologias avançadas de animação e interação.</p>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 - Desenvolvido para Gabriel, Xavier e Maya. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts da Aplicação -->
+    <script src="js/main.js"></script>
+</body>
+</html>
