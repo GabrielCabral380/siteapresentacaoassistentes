@@ -1,0 +1,8 @@
+# protegido pelo Xavier
+*.pyc
+.env
+*.env
+*.log
+*.bundle
+.here-backup-*
+.gitignore.antes-*
